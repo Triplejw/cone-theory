@@ -1,23 +1,36 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, League_Spartan, Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const leagueSpartan = League_Spartan({
+const leagueSpartan = localFont({
+  src: "./fonts/league-spartan-latin.woff2",
   variable: "--font-league-spartan",
-  subsets: ["latin"],
-  weight: ["700", "800", "900"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const montserrat = Montserrat({
+const montserrat = localFont({
+  src: "./fonts/montserrat-latin.woff2",
   variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const barlowCondensed = Barlow_Condensed({
+const barlowCondensed = localFont({
+  src: [
+    {
+      path: "./fonts/barlow-condensed-600-latin.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/barlow-condensed-700-latin.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-barlow-condensed",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

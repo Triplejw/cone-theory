@@ -1,7 +1,6 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 const flavors = [
@@ -87,7 +86,7 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Cone Theory home">
           <span className="brand__mark">
-            <img src="/cone-theory-logo.png" alt="" />
+            <Image src="/cone-theory-logo.png" alt="" width={42} height={54} />
           </span>
           <span className="brand__name">Cone Theory</span>
         </a>
@@ -129,7 +128,14 @@ export default function Home() {
           </div>
           <div className="hero__art" aria-label="Cone Theory geometric soft-serve logo">
             <span className="hero__coordinate">CT / 01</span>
-            <img src="/cone-theory-logo.png" alt="Cone Theory" />
+            <Image
+              src="/cone-theory-logo.png"
+              alt="Cone Theory"
+              width={1633}
+              height={2314}
+              priority
+              sizes="(max-width: 680px) 100vw, 42vw"
+            />
           </div>
         </section>
 
@@ -220,7 +226,14 @@ export default function Home() {
           <a className="button button--cream" href="#top">
             Stay in the loop
           </a>
-          <img src="/cone-theory-logo.png" alt="" aria-hidden="true" />
+          <Image
+            src="/cone-theory-logo.png"
+            alt=""
+            aria-hidden="true"
+            width={1633}
+            height={2314}
+            sizes="(max-width: 680px) 90vw, 52vw"
+          />
         </section>
       </main>
 
