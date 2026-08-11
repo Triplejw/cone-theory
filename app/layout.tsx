@@ -34,7 +34,7 @@ const barlowCondensed = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cone-theory-wonder-enterprise.vercel.app"),
+  metadataBase: new URL("https://cone-theory-live-wonder-enterprise.vercel.app"),
   title: "Cone Theory — Built on angles. Made for cravings.",
   description:
     "Small-batch ice cream where technical precision meets culinary art. Explore Cone Theory flavours, scoop sizes, and the method behind every craving.",
