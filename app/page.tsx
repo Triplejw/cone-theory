@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const flavors = [
   {
@@ -10,6 +10,8 @@ const flavors = [
     note: "Bright berry, a pinch of sea salt, and a finish that keeps pulling you back in.",
     tag: "House signature",
     color: "rose",
+    image: "/flavour-strawberry.jpg",
+    alt: "A selection of pink and cream ice-cream scoops",
   },
   {
     index: "02",
@@ -17,6 +19,8 @@ const flavors = [
     note: "Deep cherry folded through silky cream—sharp at the edges, lush at the centre.",
     tag: "Seasonal angle",
     color: "cherry",
+    image: "/flavour-cherry.jpg",
+    alt: "A generous pink cherry ice-cream cone",
   },
   {
     index: "03",
@@ -24,6 +28,8 @@ const flavors = [
     note: "Madagascan vanilla, slow-churned into the quiet classic every theory needs.",
     tag: "Always in rotation",
     color: "vanilla",
+    image: "/flavour-vanilla.jpg",
+    alt: "A scoop of vanilla bean ice cream on a wooden board",
   },
 ];
 
@@ -35,6 +41,8 @@ const scoopMenu = [
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
+  const [introKey, setIntroKey] = useState(0);
+  const heroArtRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -51,33 +59,82 @@ export default function Home() {
     return () => document.body.classList.remove("intro-open");
   }, [showSplash]);
 
+  useEffect(() => {
+    const progress = document.querySelector<HTMLElement>(".scroll-progress");
+    const art = heroArtRef.current;
+    let frame = 0;
+
+    const updateProgress = () => {
+      if (!progress) return;
+      const range = document.documentElement.scrollHeight - window.innerHeight;
+      const value = range > 0 ? Math.min(window.scrollY / range, 1) : 0;
+      progress.style.transform = `scaleX(${value})`;
+    };
+
+    const onScroll = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateProgress);
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      if (!art || event.pointerType === "touch") return;
+      const x = (event.clientX / window.innerWidth - 0.5) * 2;
+      const y = (event.clientY / window.innerHeight - 0.5) * 2;
+      art.style.setProperty("--pointer-x", x.toFixed(3));
+      art.style.setProperty("--pointer-y", y.toFixed(3));
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pointermove", onPointerMove);
+    };
+  }, []);
+
   const closeSplash = useCallback(() => {
     window.sessionStorage.setItem("cone-theory-intro", "seen");
     setShowSplash(false);
   }, []);
 
+  const openSplash = useCallback(() => {
+    setIntroKey((value) => value + 1);
+    setShowSplash(true);
+  }, []);
+
   return (
     <>
-      {showSplash && (
+      <div className="scroll-progress" aria-hidden="true" />
+
+      {showSplash ? (
         <section className="splash" aria-label="Cone Theory introduction">
           <video
+            key={introKey}
             className="splash__video"
             autoPlay
             muted
             playsInline
             preload="auto"
+            poster="/cone-theory-logo.png"
             onEnded={closeSplash}
           >
             <source src="/cone-theory-intro.mp4" type="video/mp4" />
           </video>
+          <div className="splash__chrome" aria-hidden="true">
+            <span>CT / INTRO</span>
+            <i />
+            <span>00:08</span>
+          </div>
           <button className="splash__skip" type="button" onClick={closeSplash}>
-            Skip intro <span aria-hidden="true">↗</span>
+            Enter site <span aria-hidden="true">↗</span>
           </button>
           <div className="splash__fallback" aria-hidden="true">
             Cone Theory
           </div>
         </section>
-      )}
+      ) : null}
 
       <a className="skip-link" href="#main-content">
         Skip to content
@@ -85,10 +142,14 @@ export default function Home() {
 
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Cone Theory home">
-          <span className="brand__mark">
-            <Image src="/cone-theory-logo.png" alt="" width={42} height={54} />
-          </span>
-          <span className="brand__name">Cone Theory</span>
+          <Image
+            className="brand__wordmark"
+            src="/cone-theory-wordmark.png"
+            alt="Cone Theory"
+            width={2906}
+            height={395}
+            priority
+          />
         </a>
         <nav className="site-nav" aria-label="Primary navigation">
           <a href="#menu">Menu</a>
@@ -96,11 +157,16 @@ export default function Home() {
           <a className="site-nav__active" href="#flavours">
             Flavours
           </a>
-          <a href="#find-us">Find us</a>
+          <button type="button" onClick={openSplash}>Watch intro</button>
         </nav>
-        <a className="button button--compact" href="#menu">
-          Order now
-        </a>
+        <div className="header-actions">
+          <button className="intro-trigger" type="button" onClick={openSplash} aria-label="Replay intro film">
+            <span aria-hidden="true">▶</span>
+          </button>
+          <a className="button button--compact" href="#menu">
+            Show menu
+          </a>
+        </div>
       </header>
 
       <main id="main-content">
@@ -121,31 +187,34 @@ export default function Home() {
               <a className="button" href="#menu">
                 View menu
               </a>
-              <a className="button button--outline" href="#story">
-                Our story
-              </a>
+              <button className="button button--outline" type="button" onClick={openSplash}>
+                Play intro <span aria-hidden="true">▶</span>
+              </button>
             </div>
           </div>
-          <div className="hero__art" aria-label="Cone Theory geometric soft-serve logo">
+          <div className="hero__art" ref={heroArtRef} aria-label="Cone Theory geometric soft-serve logo">
             <span className="hero__coordinate">CT / 01</span>
+            <span className="hero__orbit hero__orbit--one" aria-hidden="true" />
+            <span className="hero__orbit hero__orbit--two" aria-hidden="true" />
             <Image
               src="/cone-theory-logo.png"
-              alt="Cone Theory"
+              alt="Cone Theory geometric ice-cream mark"
               width={1633}
               height={2314}
               priority
-              sizes="(max-width: 680px) 100vw, 42vw"
+              sizes="(max-width: 680px) 92vw, 38vw"
             />
           </div>
         </section>
 
-        <div className="section-rule" aria-hidden="true">
-          <span />
-          <i>◆</i>
-          <span />
+        <div className="angle-ticker" aria-hidden="true">
+          <div>
+            <span>REAL INGREDIENTS</span><i>◆</i><span>SMALL BATCHES</span><i>◆</i><span>ZERO DULL SCOOPS</span><i>◆</i>
+            <span>REAL INGREDIENTS</span><i>◆</i><span>SMALL BATCHES</span><i>◆</i><span>ZERO DULL SCOOPS</span><i>◆</i>
+          </div>
         </div>
 
-        <section className="theory section-pad" id="menu">
+        <section className="theory section-pad reveal" id="menu">
           <div className="section-heading">
             <p className="eyebrow">The scoop scale / 01</p>
             <h2>
@@ -154,21 +223,36 @@ export default function Home() {
             </h2>
             <p className="section-note">Calculated indulgence, perfectly portioned.</p>
           </div>
-          <div className="menu-card">
-            <div className="menu-card__label">{"/// Menu"}</div>
-            {scoopMenu.map(([name, price]) => (
-              <div className="menu-row" key={name}>
-                <span>{name}</span>
-                <i aria-hidden="true" />
-                <strong>{price}</strong>
+          <div className="menu-showcase">
+            <div className="menu-photo-shell cut-shell">
+              <div className="menu-photo cut-shell__inner">
+                <Image
+                  src="/flavour-cherry.jpg"
+                  alt="A pink ice-cream cone—the current Cone Theory proof"
+                  fill
+                  sizes="(max-width: 980px) 100vw, 38vw"
+                />
+                <span>Today&apos;s proof / 02</span>
               </div>
-            ))}
-            <div className="menu-card__index">01 ///</div>
+            </div>
+            <div className="menu-card-shell cut-shell">
+              <div className="menu-card cut-shell__inner">
+                <div className="menu-card__label">{"/// Menu"}</div>
+                {scoopMenu.map(([name, price]) => (
+                  <div className="menu-row" key={name}>
+                    <span>{name}</span>
+                    <i aria-hidden="true" />
+                    <strong>{price}</strong>
+                  </div>
+                ))}
+                <div className="menu-card__index">01 ///</div>
+              </div>
+            </div>
           </div>
         </section>
 
         <section className="flavours section-pad" id="flavours">
-          <div className="flavours__intro">
+          <div className="flavours__intro reveal">
             <p className="eyebrow">Current hypotheses / 03 flavours</p>
             <h2>Proof tastes better frozen.</h2>
             <p>
@@ -178,15 +262,26 @@ export default function Home() {
           </div>
           <div className="flavour-grid">
             {flavors.map((flavor) => (
-              <article className="flavour-card" key={flavor.name}>
-                <div className={`flavour-card__visual flavour-card__visual--${flavor.color}`}>
-                  <span>{flavor.index}</span>
-                </div>
-                <div className="flavour-card__body">
-                  <p className="flavour-card__tag">{flavor.tag}</p>
-                  <h3>{flavor.name}</h3>
-                  <p>{flavor.note}</p>
-                  <a href="#find-us">Taste this angle <span aria-hidden="true">↗</span></a>
+              <article className={`flavour-card flavour-card--${flavor.color} reveal`} key={flavor.name}>
+                <div className="flavour-card__inner">
+                  <div className="flavour-card__visual">
+                    <Image
+                      src={flavor.image}
+                      alt={flavor.alt}
+                      fill
+                      sizes="(max-width: 980px) 76vw, 30vw"
+                    />
+                    <span>{flavor.index}</span>
+                    <i aria-hidden="true">View flavour</i>
+                  </div>
+                  <div className="flavour-card__body">
+                    <p className="flavour-card__tag">{flavor.tag}</p>
+                    <h3>{flavor.name}</h3>
+                    <p>{flavor.note}</p>
+                    <a href="#find-us" aria-label={`Find out where to taste ${flavor.name}`}>
+                      Taste this angle <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}
@@ -194,14 +289,13 @@ export default function Home() {
         </section>
 
         <section className="story section-pad" id="story">
-          <div className="story__statement">
+          <div className="story__statement reveal">
             <p className="eyebrow">Our method / no shortcuts</p>
             <h2>Dessert, engineered for delight.</h2>
           </div>
-          <div className="story__copy">
+          <div className="story__copy reveal">
             <p className="story__lead">
-              Cone Theory is where exacting craft meets the beautiful chaos of a proper
-              craving.
+              Cone Theory is where exacting craft meets the beautiful chaos of a proper craving.
             </p>
             <p>
               We build flavour in layers: thoughtful sourcing, tight recipes, slow churns,
@@ -209,23 +303,26 @@ export default function Home() {
               and absolutely no interest in playing it safe.
             </p>
             <div className="principles">
-              <div><span>01</span><strong>Real ingredients</strong></div>
-              <div><span>02</span><strong>Small batches</strong></div>
-              <div><span>03</span><strong>Zero dull scoops</strong></div>
+              <div><span>01</span><strong>Real ingredients</strong><i aria-hidden="true">↗</i></div>
+              <div><span>02</span><strong>Small batches</strong><i aria-hidden="true">↗</i></div>
+              <div><span>03</span><strong>Zero dull scoops</strong><i aria-hidden="true">↗</i></div>
             </div>
           </div>
         </section>
 
         <section className="find-us section-pad" id="find-us">
-          <p className="eyebrow">Next coordinates / coming soon</p>
-          <h2>Follow the cherry.</h2>
-          <p>
-            New flavours, tasting drops, and our next serving spot—announced where the
-            cravings are loudest.
-          </p>
-          <a className="button button--cream" href="#top">
-            Stay in the loop
-          </a>
+          <div className="find-us__content reveal">
+            <p className="eyebrow">Next coordinates / coming soon</p>
+            <h2>Follow the cherry.</h2>
+            <p>
+              New flavours, tasting drops, and our next serving spot—announced where the
+              cravings are loudest.
+            </p>
+            <div className="find-us__actions">
+              <a className="button button--cream" href="#menu">See the scoop scale</a>
+              <button className="text-button" type="button" onClick={openSplash}>Replay intro <span>▶</span></button>
+            </div>
+          </div>
           <Image
             src="/cone-theory-logo.png"
             alt=""
@@ -238,15 +335,20 @@ export default function Home() {
       </main>
 
       <footer className="site-footer">
-        <a href="#top" className="site-footer__brand">Cone<br />Theory</a>
+        <a href="#top" className="site-footer__brand" aria-label="Back to the top">
+          <Image src="/cone-theory-wordmark.png" alt="Cone Theory" width={2906} height={395} />
+        </a>
         <div className="site-footer__meta">
           <p>© 2026 Cone Theory.<br />All rights reserved. Precision chilled.</p>
-          <div>
+          <div className="site-footer__links">
             <a href="#flavours">Flavours</a>
             <a href="#story">Our story</a>
-            <a href="#find-us">Contact</a>
+            <button type="button" onClick={openSplash}>Watch intro</button>
           </div>
         </div>
+        <p className="photo-credits">
+          Photography via Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Strawberry_ice-cream.jpg" target="_blank" rel="noreferrer">Zuxra.bmr (CC0)</a>, <a href="https://commons.wikimedia.org/wiki/File:Cherry_ice_cream_cone.jpg" target="_blank" rel="noreferrer">Jessica Rossi (CC BY-SA 2.0)</a>, and <a href="https://commons.wikimedia.org/wiki/File:Vanilla_bean_ice_cream_(3086700978).jpg" target="_blank" rel="noreferrer">a.pasquier (CC BY-SA 2.0)</a>.
+        </p>
       </footer>
     </>
   );

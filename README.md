@@ -10,6 +10,9 @@ angles and made for cravings.
 - Responsive, accessible interface with a reduced-motion mode
 - Vercel production hosting
 
+Third-party photography and licenses are documented in
+[ASSET_LICENSES.md](./ASSET_LICENSES.md).
+
 ## Local development
 
 ```bash
