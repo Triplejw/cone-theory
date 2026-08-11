@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240" role="img" aria-labelledby="title description">
+  <title id="title">Cone Theory core colour palette</title>
+  <desc id="description">Cream, ice pink, strong pink, brand red, dark cherry, and leaf green swatches from the Cone Theory visual identity.</desc>
+  <rect width="1200" height="240" rx="24" fill="#FFF8F2"/>
+  <text x="28" y="46" fill="#880A13" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4">CONE THEORY / COLOUR SYSTEM</text>
+
+  <g font-family="Arial, sans-serif">
+    <g transform="translate(28 72)">
+      <rect width="176" height="116" rx="14" fill="#FFF3E2" stroke="#880A13" stroke-opacity="0.22"/>
+      <text x="16" y="38" fill="#201B11" font-size="15" font-weight="700">CREAM</text>
+      <text x="16" y="92" fill="#5B4040" font-size="14">#FFF3E2</text>
+    </g>
+    <g transform="translate(222 72)">
+      <rect width="176" height="116" rx="14" fill="#FCB3C4"/>
+      <text x="16" y="38" fill="#5B070D" font-size="15" font-weight="700">ICE PINK</text>
+      <text x="16" y="92" fill="#5B070D" font-size="14">#FCB3C4</text>
+    </g>
+    <g transform="translate(416 72)">
+      <rect width="176" height="116" rx="14" fill="#F985A0"/>
+      <text x="16" y="38" fill="#5B070D" font-size="15" font-weight="700">PINK</text>
+      <text x="16" y="92" fill="#5B070D" font-size="14">#F985A0</text>
+    </g>
+    <g transform="translate(610 72)">
+      <rect width="176" height="116" rx="14" fill="#B50D2D"/>
+      <text x="16" y="38" fill="#FFF3E2" font-size="15" font-weight="700">BRAND RED</text>
+      <text x="16" y="92" fill="#FFF3E2" font-size="14">#B50D2D</text>
+    </g>
+    <g transform="translate(804 72)">
+      <rect width="176" height="116" rx="14" fill="#5B070D"/>
+      <text x="16" y="38" fill="#FFF3E2" font-size="15" font-weight="700">CHERRY</text>
+      <text x="16" y="92" fill="#FFF3E2" font-size="14">#5B070D</text>
+    </g>
+    <g transform="translate(998 72)">
+      <rect width="174" height="116" rx="14" fill="#1A6128"/>
+      <text x="16" y="38" fill="#FFF3E2" font-size="15" font-weight="700">LEAF</text>
+      <text x="16" y="92" fill="#FFF3E2" font-size="14">#1A6128</text>
+    </g>
+  </g>
+</svg>
