@@ -11,6 +11,7 @@ test("ships the complete Cone Theory experience", async () => {
     readFile(new URL("../README.md", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     access(new URL("../public/cone-theory-logo.png", import.meta.url)),
+    access(new URL("../public/cone-theory-header-logo.png", import.meta.url)),
     access(new URL("../public/og-v2.jpg", import.meta.url)),
     access(new URL("../public/cone-theory-wordmark.png", import.meta.url)),
     access(new URL("../public/flavour-strawberry.jpg", import.meta.url)),
@@ -32,6 +33,7 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(page, /id="find-us"/);
   assert.match(page, /openSplash/);
   assert.match(page, /className="brand__mark"/);
+  assert.match(page, /src="\/cone-theory-header-logo\.png"/);
   assert.match(page, /site-nav site-nav--left/);
   assert.match(page, /site-nav site-nav--right/);
   assert.match(page, /className="header-right"/);
@@ -60,10 +62,13 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(storyPage, /same department at the same university/);
   assert.match(storyPage, /\/collaborators\/daniel-dencil\.jpg/);
   assert.match(storyPage, /\/collaborators\/joshua-jj-wonder\.jpg/);
+  assert.match(storyPage, /src="\/cone-theory-header-logo\.png"/);
+  assert.match(storyPage, /href="https:\/\/www\.behance\.net\/jker2"/);
   assert.match(storyPage, /aria-current="page"/);
   assert.match(storyPage, /href="\/#menu"/);
   assert.doesNotMatch(readme, /expected to join/i);
   assert.match(readme, /collaborate on Cone Theory as its creative/);
+  assert.match(readme, /href="https:\/\/www\.behance\.net\/jker2"/);
   assert.match(layout, /Cone Theory — Built on angles\. Made for cravings\./);
   assert.match(layout, /next\/font\/local/);
   assert.match(layout, /images: \["\/og-v2\.jpg"\]/);

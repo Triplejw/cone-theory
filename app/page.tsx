@@ -170,10 +170,10 @@ export default function Home() {
         <a className="brand" href="#top" aria-label="Cone Theory home">
           <span className="brand__mark" aria-hidden="true">
             <Image
-              src="/cone-theory-logo.png"
+              src="/cone-theory-header-logo.png"
               alt=""
-              width={1633}
-              height={2314}
+              width={847}
+              height={1013}
               priority
             />
           </span>

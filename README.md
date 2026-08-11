@@ -75,6 +75,8 @@ required environment variables, or external runtime media service.
       <br /><br />
       <a href="https://www.linkedin.com/in/daniel-dencil/">LinkedIn ↗</a>
       ·
+      <a href="https://www.behance.net/jker2">Behance ↗</a>
+      ·
       <a href="https://www.figma.com/design/xnv5wiOto4odb8jiQ2Trtv/Untitled?node-id=0-1&p=f&m=draw">Figma ↗</a>
     </td>
     <td align="center" width="50%">
@@ -242,6 +244,7 @@ interactions instead of a large animation dependency.
 │   ├── collaborators/
 │   │   ├── daniel-dencil.jpg          # UI/UX designer portrait
 │   │   └── joshua-jj-wonder.jpg       # Developer portrait
+│   ├── cone-theory-header-logo.png    # Cream header mark
 │   ├── cone-theory-logo.png           # Daniel’s geometric brand artwork
 │   ├── cone-theory-wordmark.png       # Daniel’s Cone Theory wordmark
 │   ├── flavour-*.jpg                  # Licensed flavour photography

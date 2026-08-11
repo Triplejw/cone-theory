@@ -79,7 +79,7 @@ export default function StoryPage() {
 
         <Link className="brand" href="/" aria-label="Cone Theory home">
           <span className="brand__mark" aria-hidden="true">
-            <Image src="/cone-theory-logo.png" alt="" width={1633} height={2314} priority />
+            <Image src="/cone-theory-header-logo.png" alt="" width={847} height={1013} priority />
           </span>
           <Image
             className="brand__wordmark"
@@ -245,9 +245,19 @@ export default function StoryPage() {
                     idea into a coherent visual world with energy, character, and a clear
                     point of view.
                   </p>
-                  <a href="https://www.linkedin.com/in/daniel-dencil/" target="_blank" rel="noreferrer">
-                    Connect with Daniel <span aria-hidden="true">↗</span>
-                  </a>
+                  <div className="story-profile__links">
+                    <a href="https://www.linkedin.com/in/daniel-dencil/" target="_blank" rel="noopener noreferrer">
+                      Connect with Daniel <span aria-hidden="true">↗</span>
+                    </a>
+                    <a
+                      href="https://www.behance.net/jker2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Daniel Dencil on Behance (opens in a new tab)"
+                    >
+                      Daniel on Behance <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </article>
@@ -278,9 +288,11 @@ export default function StoryPage() {
                     design—it feels intuitive, alive, and ready for production on GitHub and
                     Vercel.
                   </p>
-                  <a href="https://github.com/Triplejw" target="_blank" rel="noreferrer">
-                    Explore Joshua&apos;s work <span aria-hidden="true">↗</span>
-                  </a>
+                  <div className="story-profile__links">
+                    <a href="https://github.com/Triplejw" target="_blank" rel="noopener noreferrer">
+                      Explore Joshua&apos;s work <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </article>
