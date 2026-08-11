@@ -28,12 +28,16 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(page, /site-nav site-nav--left/);
   assert.match(page, /site-nav site-nav--right/);
   assert.match(page, /className="header-right"/);
+  assert.match(page, /className="angle-ticker__track"/);
+  assert.match(page, /className="angle-ticker__group"/);
   assert.match(page, /cone-theory-wordmark\.png/);
   assert.doesNotMatch(page, /site-nav__active/);
   assert.match(page, /Wikimedia Commons/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /--brand-red: #b50d2d/);
+  assert.match(css, /animation: ticker 40s linear infinite/);
+  assert.match(css, /translate3d\(-50%, 0, 0\)/);
   assert.doesNotMatch(css, /#fedde5|--ice-50/);
   assert.match(layout, /Cone Theory — Built on angles\. Made for cravings\./);
   assert.match(layout, /next\/font\/local/);

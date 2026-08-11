@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
 const flavors = [
   {
@@ -31,6 +31,15 @@ const flavors = [
     image: "/flavour-vanilla.jpg",
     alt: "A scoop of vanilla bean ice cream on a wooden board",
   },
+];
+
+const tickerPhrases = [
+  "REAL INGREDIENTS",
+  "SMALL BATCHES",
+  "ZERO DULL SCOOPS",
+  "REAL INGREDIENTS",
+  "SMALL BATCHES",
+  "ZERO DULL SCOOPS",
 ];
 
 const scoopMenu = [
@@ -219,9 +228,17 @@ export default function Home() {
         </section>
 
         <div className="angle-ticker" aria-hidden="true">
-          <div>
-            <span>REAL INGREDIENTS</span><i>◆</i><span>SMALL BATCHES</span><i>◆</i><span>ZERO DULL SCOOPS</span><i>◆</i>
-            <span>REAL INGREDIENTS</span><i>◆</i><span>SMALL BATCHES</span><i>◆</i><span>ZERO DULL SCOOPS</span><i>◆</i>
+          <div className="angle-ticker__track">
+            {[0, 1].map((groupIndex) => (
+              <div className="angle-ticker__group" key={groupIndex}>
+                {tickerPhrases.map((phrase, phraseIndex) => (
+                  <Fragment key={`${groupIndex}-${phraseIndex}`}>
+                    <span>{phrase}</span>
+                    <i>◆</i>
+                  </Fragment>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
 
