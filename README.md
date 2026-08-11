@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://cone-theory-live-wonder-enterprise.vercel.app/">Live website</a>
+  <a href="https://cone-theory-live.vercel.app/">Live website</a>
   ·
   <a href="https://www.figma.com/design/xnv5wiOto4odb8jiQ2Trtv/Untitled?node-id=0-1&p=f&m=draw">Figma design</a>
   ·
@@ -268,7 +268,7 @@ Recommended release checks:
 
 ## Production deployment
 
-- **Live site:** https://cone-theory-live-wonder-enterprise.vercel.app/
+- **Live site:** https://cone-theory-live.vercel.app/
 - **Source:** https://github.com/Triplejw/cone-theory
 - **Production branch:** main
 - **Build command:** pnpm build
