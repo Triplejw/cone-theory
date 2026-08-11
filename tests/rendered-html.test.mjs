@@ -24,7 +24,9 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(page, /id="story"/);
   assert.match(page, /id="find-us"/);
   assert.match(page, /openSplash/);
+  assert.match(page, /className="brand__mark"/);
   assert.match(page, /cone-theory-wordmark\.png/);
+  assert.doesNotMatch(page, /site-nav__active/);
   assert.match(page, /Wikimedia Commons/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);

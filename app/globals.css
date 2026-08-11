@@ -212,8 +212,29 @@ video {
 }
 
 .brand {
-  flex: 0 1 220px;
-  min-width: 150px;
+  flex: 0 1 270px;
+  min-width: 190px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand__mark {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  overflow: hidden;
+}
+
+.brand__mark img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 46.5px;
+  max-width: none;
+  height: auto;
+  transform: translateX(-50%);
 }
 
 .brand__wordmark {
@@ -261,8 +282,7 @@ video {
 .site-nav a:hover::after,
 .site-nav a:focus-visible::after,
 .site-nav button:hover::after,
-.site-nav button:focus-visible::after,
-.site-nav__active::after {
+.site-nav button:focus-visible::after {
   opacity: 1 !important;
   transform: translate(-50%, 0) rotate(45deg) !important;
 }
@@ -1145,6 +1165,8 @@ video {
 
 @media (max-width: 1160px) {
   .site-header { gap: 18px; }
+  .brand { flex-basis: 230px; }
+  .brand__wordmark { width: clamp(146px, 15vw, 182px); }
   .site-nav { gap: 18px; }
   .hero { grid-template-columns: minmax(0, 1.18fr) minmax(310px, 0.68fr); column-gap: 44px; }
   .hero h1 { font-size: clamp(64px, 8vw, 92px); }
@@ -1192,8 +1214,10 @@ video {
 
 @media (max-width: 680px) {
   html { scroll-padding-top: 72px; }
-  .brand { min-width: 0; flex-basis: 146px; }
-  .brand__wordmark { width: 142px; }
+  .brand { min-width: 0; flex-basis: 182px; gap: 8px; }
+  .brand__mark { width: 32px; height: 32px; flex-basis: 32px; }
+  .brand__mark img { width: 37px; }
+  .brand__wordmark { width: 132px; }
   .button--compact { min-height: 38px; padding: 0 14px; font-size: 11px; }
   .intro-trigger { width: 38px; height: 38px; }
 
@@ -1243,8 +1267,10 @@ video {
 
 @media (max-width: 430px) {
   .site-header { padding-inline: 14px; gap: 8px; }
-  .brand { flex-basis: 120px; }
-  .brand__wordmark { width: 118px; }
+  .brand { flex-basis: 150px; gap: 6px; }
+  .brand__mark { width: 28px; height: 28px; flex-basis: 28px; }
+  .brand__mark img { width: 32.5px; }
+  .brand__wordmark { width: 112px; }
   .intro-trigger { width: 36px; height: 36px; }
   .button--compact { padding-inline: 11px; letter-spacing: 0.06em; }
   .hero { padding-inline: 16px; }
@@ -1252,6 +1278,11 @@ video {
   .hero__actions { flex-direction: column; align-items: stretch; }
   .menu-row { font-size: 15px; }
   .flavour-card { flex-basis: 88vw; }
+}
+
+@media (max-width: 360px) {
+  .brand { flex-basis: 140px; }
+  .brand__wordmark { width: 104px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

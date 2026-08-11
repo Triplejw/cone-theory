@@ -142,6 +142,15 @@ export default function Home() {
 
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Cone Theory home">
+          <span className="brand__mark" aria-hidden="true">
+            <Image
+              src="/cone-theory-logo.png"
+              alt=""
+              width={1633}
+              height={2314}
+              priority
+            />
+          </span>
           <Image
             className="brand__wordmark"
             src="/cone-theory-wordmark.png"
@@ -154,9 +163,7 @@ export default function Home() {
         <nav className="site-nav" aria-label="Primary navigation">
           <a href="#menu">Menu</a>
           <a href="#story">Our story</a>
-          <a className="site-nav__active" href="#flavours">
-            Flavours
-          </a>
+          <a href="#flavours">Flavours</a>
           <button type="button" onClick={openSplash}>Watch intro</button>
         </nav>
         <div className="header-actions">
