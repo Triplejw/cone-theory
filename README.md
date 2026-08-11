@@ -11,9 +11,6 @@
   <a href="https://cone-theory-live.vercel.app/">
     <img src="https://img.shields.io/badge/LIVE%20SITE-B50D2D?style=for-the-badge&logo=vercel&logoColor=white" alt="Open the live Cone Theory website" />
   </a>
-  <a href="https://www.figma.com/design/xnv5wiOto4odb8jiQ2Trtv/Untitled?node-id=0-1&p=f&m=draw">
-    <img src="https://img.shields.io/badge/ORIGINAL%20DESIGN-F985A0?style=for-the-badge&logo=figma&logoColor=5B070D" alt="Open the original Figma design" />
-  </a>
   <a href="https://github.com/Triplejw/cone-theory/actions/workflows/production-verification.yml">
     <img src="https://github.com/Triplejw/cone-theory/actions/workflows/production-verification.yml/badge.svg?branch=main" alt="Production verification status" />
   </a>
@@ -76,8 +73,6 @@ required environment variables, or external runtime media service.
       <a href="https://www.linkedin.com/in/daniel-dencil/">LinkedIn ↗</a>
       ·
       <a href="https://www.behance.net/jker2">Behance ↗</a>
-      ·
-      <a href="https://www.figma.com/design/xnv5wiOto4odb8jiQ2Trtv/Untitled?node-id=0-1&p=f&m=draw">Figma ↗</a>
     </td>
     <td align="center" width="50%">
       <a href="https://github.com/Triplejw">
