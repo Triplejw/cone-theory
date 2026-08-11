@@ -46,13 +46,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cone Theory — Built on angles. Made for cravings.",
     description: "Real ingredients. Real good. Precision-chilled ice cream with an angle.",
-    images: [{ url: "/og-v2.png", width: 1200, height: 630, alt: "Cone Theory — built on angles, made for cravings" }],
+    images: [{ url: "/og-v2.jpg", width: 1200, height: 630, alt: "Cone Theory — built on angles, made for cravings" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Cone Theory — Built on angles. Made for cravings.",
     description: "Real ingredients. Real good. Precision-chilled ice cream with an angle.",
-    images: ["/og-v2.png"],
+    images: ["/og-v2.jpg"],
   },
 };
 
