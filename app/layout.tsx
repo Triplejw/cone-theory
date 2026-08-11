@@ -34,25 +34,31 @@ const barlowCondensed = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cone-theory-live.vercel.app"),
+  metadataBase: new URL("https://www.conetheory.store"),
   title: "Cone Theory — Built on angles. Made for cravings.",
   description:
     "Small-batch ice cream where technical precision meets culinary art. Explore Cone Theory flavours, scoop sizes, and the method behind every craving.",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/cone-theory-logo.png",
     shortcut: "/cone-theory-logo.png",
     apple: "/cone-theory-logo.png",
   },
   openGraph: {
+    type: "website",
+    siteName: "Cone Theory",
+    url: "/",
     title: "Cone Theory — Built on angles. Made for cravings.",
     description: "Real ingredients. Real good. Precision-chilled ice cream with an angle.",
-    images: [{ url: "/og-v2.jpg", width: 1200, height: 630, alt: "Cone Theory — built on angles, made for cravings" }],
+    images: [{ url: "/og-v3.jpg", width: 1200, height: 630, alt: "Cone Theory — built on angles, made for cravings" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Cone Theory — Built on angles. Made for cravings.",
     description: "Real ingredients. Real good. Precision-chilled ice cream with an angle.",
-    images: ["/og-v2.jpg"],
+    images: [{ url: "/og-v3.jpg", alt: "Cone Theory — built on angles, made for cravings" }],
   },
 };
 

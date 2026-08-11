@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: "/story",
     images: [
       {
-        url: "/og-v2.jpg",
+        url: "/og-v3.jpg",
         width: 1200,
         height: 630,
         alt: "Cone Theory — built on angles, made for cravings",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Our Story — Cone Theory",
     description:
       "Meet Daniel Dencil and Joshua JJ Wonder, the collaborators behind Cone Theory.",
-    images: ["/og-v2.jpg"],
+    images: [{ url: "/og-v3.jpg", alt: "Cone Theory — built on angles, made for cravings" }],
   },
 };
 

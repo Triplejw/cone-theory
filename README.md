@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://cone-theory-live.vercel.app/">
+  <a href="https://www.conetheory.store/">
     <img src="https://img.shields.io/badge/LIVE%20SITE-B50D2D?style=for-the-badge&logo=vercel&logoColor=white" alt="Open the live Cone Theory website" />
   </a>
   <a href="https://github.com/Triplejw/cone-theory/actions/workflows/production-verification.yml">
@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <img src="./public/og-v2.jpg" alt="Cone Theory — built on angles, made for cravings" width="900" />
+  <img src="./public/og-v3.jpg" alt="Cone Theory — built on angles, made for cravings" width="900" />
 </p>
 
 ## The project
@@ -89,7 +89,7 @@ required environment variables, or external runtime media service.
       <br /><br />
       <a href="https://github.com/Triplejw">GitHub ↗</a>
       ·
-      <a href="https://cone-theory-live.vercel.app/">Live build ↗</a>
+      <a href="https://www.conetheory.store/">Live build ↗</a>
     </td>
   </tr>
 </table>
@@ -243,7 +243,7 @@ interactions instead of a large animation dependency.
 │   ├── cone-theory-logo.png           # Daniel’s geometric brand artwork
 │   ├── cone-theory-wordmark.png       # Daniel’s Cone Theory wordmark
 │   ├── flavour-*.jpg                  # Licensed flavour photography
-│   └── og-v2.jpg                      # Active 1200 × 630 sharing image
+│   └── og-v3.jpg                      # Active 1200 × 630 sharing image
 ├── tests/
 │   └── rendered-html.test.mjs         # Source and build smoke checks
 ├── ASSET_LICENSES.md
@@ -368,7 +368,7 @@ Recommended release checks:
 
 | Setting | Value |
 | --- | --- |
-| Live site | [cone-theory-live.vercel.app](https://cone-theory-live.vercel.app/) |
+| Live site | [conetheory.store](https://www.conetheory.store/) |
 | Source repository | [Triplejw/cone-theory](https://github.com/Triplejw/cone-theory) |
 | Production branch | `main` |
 | Build command | `pnpm build` |

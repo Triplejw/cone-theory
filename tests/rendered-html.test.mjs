@@ -2,17 +2,46 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
+function readJpegDimensions(image) {
+  assert.equal(image.subarray(0, 2).toString("hex"), "ffd8");
+
+  for (let offset = 2; offset + 9 < image.length; ) {
+    if (image[offset] !== 0xff) {
+      offset += 1;
+      continue;
+    }
+
+    const marker = image[offset + 1];
+    const segmentLength = image.readUInt16BE(offset + 2);
+    const isStartOfFrame =
+      marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker);
+
+    if (isStartOfFrame) {
+      return {
+        height: image.readUInt16BE(offset + 5),
+        width: image.readUInt16BE(offset + 7),
+      };
+    }
+
+    offset += 2 + segmentLength;
+  }
+
+  throw new Error("Could not read JPEG dimensions.");
+}
+
 test("ships the complete Cone Theory experience", async () => {
-  const [page, storyPage, css, layout, readme, packageJson] = await Promise.all([
+  const [page, storyPage, css, layout, readme, packageJson, builtHome, builtStory, socialImage] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/story/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../README.md", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../out/index.html", import.meta.url), "utf8"),
+    readFile(new URL("../out/story.html", import.meta.url), "utf8"),
+    readFile(new URL("../public/og-v3.jpg", import.meta.url)),
     access(new URL("../public/cone-theory-logo.png", import.meta.url)),
     access(new URL("../public/cone-theory-header-logo.png", import.meta.url)),
-    access(new URL("../public/og-v2.jpg", import.meta.url)),
     access(new URL("../public/cone-theory-wordmark.png", import.meta.url)),
     access(new URL("../public/flavour-strawberry.jpg", import.meta.url)),
     access(new URL("../public/flavour-cherry.jpg", import.meta.url)),
@@ -78,7 +107,19 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(readme, /href="https:\/\/www\.behance\.net\/jker2"/);
   assert.match(layout, /Cone Theory — Built on angles\. Made for cravings\./);
   assert.match(layout, /next\/font\/local/);
-  assert.match(layout, /images: \["\/og-v2\.jpg"\]/);
+  assert.match(layout, /metadataBase: new URL\("https:\/\/www\.conetheory\.store"\)/);
+  assert.match(layout, /images: \[\{ url: "\/og-v3\.jpg"/);
+  assert.match(storyPage, /url: "\/og-v3\.jpg"/);
+  assert.doesNotMatch(`${layout}${storyPage}${readme}`, /cone-theory-live\.vercel\.app|og-v2\.jpg/);
+  assert.match(builtHome, /<link rel="canonical" href="https:\/\/www\.conetheory\.store"/);
+  assert.match(builtHome, /<meta property="og:url" content="https:\/\/www\.conetheory\.store"/);
+  assert.match(builtStory, /<link rel="canonical" href="https:\/\/www\.conetheory\.store\/story"/);
+  for (const html of [builtHome, builtStory]) {
+    assert.match(html, /https:\/\/www\.conetheory\.store\/og-v3\.jpg/);
+    assert.doesNotMatch(html, /cone-theory-live\.vercel\.app|og-v2\.jpg/);
+  }
+  assert.deepEqual(readJpegDimensions(socialImage), { width: 1200, height: 630 });
+  assert.ok(socialImage.length < 5 * 1024 * 1024);
   assert.match(packageJson, /"next": "16\.2\.6"/);
   assert.doesNotMatch(packageJson, /vinext|react-loading-skeleton/);
 });
