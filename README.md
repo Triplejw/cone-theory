@@ -37,11 +37,13 @@
 Cone Theory is a collaborative design-to-production project built around a
 geometric ice-cream identity. The experience combines angular brand artwork,
 editorial typography, product photography, clipped surfaces, and purposeful
-motion in a responsive single-page website.
+motion across a responsive landing page and dedicated collaboration story.
 
 The production site opens with a three-second logo-and-tagline splash, moves
 through the scoop menu and current flavour lineup, explains the small-batch
-method, and closes with a clear follow-the-brand call to action.
+method, and closes with a clear follow-the-brand call to action. Its **Our
+Story** route introduces the two collaborators and follows the work from shared
+university roots through design, development, and launch.
 
 The application is a statically exported Next.js site. It has no database,
 required environment variables, or external runtime media service.
@@ -60,7 +62,7 @@ required environment variables, or external runtime media service.
   <tr>
     <td align="center" width="50%">
       <a href="https://www.linkedin.com/in/daniel-dencil/">
-        <img src="./docs/assets/collaborators/daniel-dencil.jpg" width="220" alt="Portrait of Daniel Dencil" />
+        <img src="./public/collaborators/daniel-dencil.jpg" width="220" alt="Portrait of Daniel Dencil" />
       </a>
       <br />
       <strong>Daniel Dencil</strong>
@@ -77,7 +79,7 @@ required environment variables, or external runtime media service.
     </td>
     <td align="center" width="50%">
       <a href="https://github.com/Triplejw">
-        <img src="./docs/assets/collaborators/joshua-jj-wonder.jpg" width="220" alt="Portrait of Joshua JJ Wonder" />
+        <img src="./public/collaborators/joshua-jj-wonder.jpg" width="220" alt="Portrait of Joshua JJ Wonder" />
       </a>
       <br />
       <strong>Joshua JJ Wonder</strong>
@@ -95,9 +97,10 @@ required environment variables, or external runtime media service.
   </tr>
 </table>
 
-Daniel is expected to join the repository as a collaborator. This README
-records the project as shared creative and technical work from the outset;
-the design credit is part of the project history and should remain intact.
+Daniel Dencil and Joshua JJ Wonder collaborate on Cone Theory as its creative
+and technical leads. This repository records their shared work while preserving
+clear credit for Daniel’s design authorship and Joshua’s production
+implementation.
 
 ### Contribution map
 
@@ -136,6 +139,7 @@ hierarchy while adapting the experience to real browser constraints:
 - Cherry-red content surfaces with accessible cream contrast
 - Scroll-progress indicator and scroll-driven section reveals
 - Mobile flavour-card snapping and touch-aware interaction states
+- Dedicated **Our Story** route with collaborator profiles and project journey
 - Self-hosted typography and original Cone Theory wordmark artwork
 - Open Graph and Twitter metadata with a 1200 × 630 sharing card
 - Fully static, Vercel-compatible production output
@@ -149,6 +153,7 @@ hierarchy while adapting the experience to real browser constraints:
 | Scoop scale | Presents serving sizes and pricing |
 | Flavours | Shows the current flavour hypotheses with licensed photography |
 | Our method | Explains Cone Theory’s sourcing and small-batch principles |
+| Our Story (`/story`) | Profiles Daniel and Joshua and traces the collaboration from concept to launch |
 | Find us | Points toward upcoming drops and serving locations |
 | Footer | Closes with navigation, replay, copyright, and attribution |
 
@@ -226,15 +231,17 @@ interactions instead of a large animation dependency.
 │   └── production-verification.yml
 ├── app/
 │   ├── fonts/                         # Self-hosted font files
+│   ├── story/
+│   │   └── page.tsx                   # Collaboration story and profiles
 │   ├── globals.css                    # Tokens, layout, motion, responsive rules
 │   ├── layout.tsx                     # Fonts, icons, and social metadata
 │   └── page.tsx                       # Content and client-side interactions
 ├── docs/assets/
-│   ├── brand-palette.svg              # README palette visual
-│   └── collaborators/
-│       ├── daniel-dencil.jpg          # UI/UX designer portrait
-│       └── joshua-jj-wonder.jpg       # Developer portrait
+│   └── brand-palette.svg              # README palette visual
 ├── public/
+│   ├── collaborators/
+│   │   ├── daniel-dencil.jpg          # UI/UX designer portrait
+│   │   └── joshua-jj-wonder.jpg       # Developer portrait
 │   ├── cone-theory-logo.png           # Daniel’s geometric brand artwork
 │   ├── cone-theory-wordmark.png       # Daniel’s Cone Theory wordmark
 │   ├── flavour-*.jpg                  # Licensed flavour photography
@@ -321,8 +328,8 @@ should be rechecked after substantial design changes.
   and colour palette are credited to **Daniel Dencil**.
 - The website implementation, interaction engineering, QA, repository setup,
   and deployment are credited to **Joshua JJ Wonder**.
-- Contributor portraits were supplied for this repository’s documentation and
-  are not licensed for unrelated reuse.
+- Collaborator portraits were supplied for project attribution on the website
+  and in this repository and are not licensed for unrelated reuse.
 - Flavour photography comes from Wikimedia Commons under its respective
   licenses and remains credited in the website footer.
 

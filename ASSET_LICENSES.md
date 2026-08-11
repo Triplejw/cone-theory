@@ -11,9 +11,9 @@ The production website, responsive implementation, interaction system,
 accessibility work, automated verification, repository workflow, and Vercel
 delivery were created by [Joshua JJ Wonder](https://github.com/Triplejw).
 
-The collaborator portraits in `docs/assets/collaborators/` were supplied for
-project attribution in this repository. They are not licensed for unrelated
-reuse or redistribution.
+The collaborator portraits in `public/collaborators/` were supplied for project
+attribution on the website and in this repository. They are not licensed for
+unrelated reuse or redistribution.
 
 ## Flavour photography
 

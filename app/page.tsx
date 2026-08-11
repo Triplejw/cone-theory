@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
 const flavors = [
@@ -164,7 +165,7 @@ export default function Home() {
       <header className="site-header">
         <nav className="site-nav site-nav--left" aria-label="Primary navigation">
           <a href="#menu">Menu</a>
-          <a href="#story">Our story</a>
+          <Link href="/story">Our story</Link>
         </nav>
         <a className="brand" href="#top" aria-label="Cone Theory home">
           <span className="brand__mark" aria-hidden="true">
@@ -347,6 +348,9 @@ export default function Home() {
               <div><span>02</span><strong>Small batches</strong><i aria-hidden="true">↗</i></div>
               <div><span>03</span><strong>Zero dull scoops</strong><i aria-hidden="true">↗</i></div>
             </div>
+            <Link className="button story__maker-link" href="/story">
+              Meet the collaborators <span aria-hidden="true">↗</span>
+            </Link>
           </div>
         </section>
 
@@ -382,7 +386,7 @@ export default function Home() {
           <p>© 2026 Cone Theory.<br />All rights reserved. Precision chilled.</p>
           <div className="site-footer__links">
             <a href="#flavours">Flavours</a>
-            <a href="#story">Our story</a>
+            <Link href="/story">Our story</Link>
             <button type="button" onClick={openSplash}>Replay splash</button>
           </div>
         </div>
