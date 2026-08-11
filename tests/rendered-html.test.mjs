@@ -54,6 +54,13 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(css, /\.story-home-trigger/);
   assert.match(css, /\.story-values__grid article\.reveal[\s\S]*animation-name: reveal-card-up/);
   assert.match(css, /@keyframes reveal-card-up/);
+  assert.doesNotMatch(css, /letter-spacing:\s*-/);
+  assert.match(css, /\.hero h1 \.outline[\s\S]*?font-kerning: none/);
+  assert.match(css, /\.story-hero h1 \.outline[\s\S]*?font-kerning: none/);
+  assert.doesNotMatch(css, /\.flavour-card:nth-child\(2\)[^{]*\{[^}]*transform:/);
+  assert.match(css, /\.flavour-card h3[\s\S]*color: var\(--ink\)/);
+  assert.match(css, /\.story-values__grid h3[\s\S]*min-height: 2em/);
+  assert.match(css, /@media \(max-width: 1360px\)[\s\S]*?\.story-values__grid/);
   assert.doesNotMatch(css, /#fedde5|--ice-50/);
   assert.match(storyPage, /export const metadata/);
   assert.doesNotMatch(storyPage, /["']use client["']/);
