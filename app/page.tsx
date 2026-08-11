@@ -48,24 +48,32 @@ const scoopMenu = [
   ["Triple dimension", "₹200"],
 ];
 
+const SPLASH_DURATION_MS = 3_000;
+
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
-  const [introKey, setIntroKey] = useState(0);
+  const [splashKey, setSplashKey] = useState(0);
   const heroArtRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const hasSeenIntro = window.sessionStorage.getItem("cone-theory-intro") === "seen";
+    let hasSeenSplash = false;
 
-    if (reduceMotion || hasSeenIntro) {
+    try {
+      hasSeenSplash = window.sessionStorage.getItem("cone-theory-splash") === "seen";
+    } catch {
+      // Storage can be unavailable in strict privacy modes; the splash still remains dismissible.
+    }
+
+    if (reduceMotion || hasSeenSplash) {
       const frame = window.requestAnimationFrame(() => setShowSplash(false));
       return () => window.cancelAnimationFrame(frame);
     }
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("intro-open", showSplash);
-    return () => document.body.classList.remove("intro-open");
+    document.body.classList.toggle("splash-open", showSplash);
+    return () => document.body.classList.remove("splash-open");
   }, [showSplash]);
 
   useEffect(() => {
@@ -104,44 +112,48 @@ export default function Home() {
   }, []);
 
   const closeSplash = useCallback(() => {
-    window.sessionStorage.setItem("cone-theory-intro", "seen");
+    try {
+      window.sessionStorage.setItem("cone-theory-splash", "seen");
+    } catch {
+      // Closing the splash should never depend on storage access.
+    }
     setShowSplash(false);
   }, []);
 
   const openSplash = useCallback(() => {
-    setIntroKey((value) => value + 1);
+    setSplashKey((value) => value + 1);
     setShowSplash(true);
   }, []);
+
+  useEffect(() => {
+    if (!showSplash) return;
+
+    const timeout = window.setTimeout(closeSplash, SPLASH_DURATION_MS);
+    return () => window.clearTimeout(timeout);
+  }, [closeSplash, showSplash, splashKey]);
 
   return (
     <>
       <div className="scroll-progress" aria-hidden="true" />
 
       {showSplash ? (
-        <section className="splash" aria-label="Cone Theory introduction">
-          <video
-            key={introKey}
-            className="splash__video"
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            poster="/cone-theory-logo.png"
-            onEnded={closeSplash}
-          >
-            <source src="/cone-theory-intro.mp4" type="video/mp4" />
-          </video>
-          <div className="splash__chrome" aria-hidden="true">
-            <span>CT / INTRO</span>
-            <i />
-            <span>00:08</span>
+        <section className="splash" key={splashKey} aria-label="Cone Theory brand introduction">
+          <div className="splash__identity">
+            <Image
+              className="splash__logo"
+              src="/cone-theory-logo.png"
+              alt="Cone Theory"
+              width={1633}
+              height={2314}
+              priority
+              sizes="(max-width: 680px) 64vw, 330px"
+            />
+            <p className="splash__tagline">Built on angles. Made for cravings.</p>
           </div>
           <button className="splash__skip" type="button" onClick={closeSplash}>
             Enter site <span aria-hidden="true">↗</span>
           </button>
-          <div className="splash__fallback" aria-hidden="true">
-            Cone Theory
-          </div>
+          <div className="splash__progress" aria-hidden="true" />
         </section>
       ) : null}
 
@@ -176,11 +188,11 @@ export default function Home() {
         <div className="header-right">
           <nav className="site-nav site-nav--right" aria-label="Secondary navigation">
             <a href="#flavours">Flavours</a>
-            <button type="button" onClick={openSplash}>Watch intro</button>
+            <button type="button" onClick={openSplash}>Replay splash</button>
           </nav>
           <div className="header-actions">
-            <button className="intro-trigger" type="button" onClick={openSplash} aria-label="Replay intro film">
-              <span aria-hidden="true">▶</span>
+            <button className="splash-trigger" type="button" onClick={openSplash} aria-label="Replay brand splash">
+              <span aria-hidden="true">◆</span>
             </button>
             <a className="button button--compact" href="#menu">
               Show menu
@@ -208,7 +220,7 @@ export default function Home() {
                 View menu
               </a>
               <button className="button button--outline" type="button" onClick={openSplash}>
-                Play intro <span aria-hidden="true">▶</span>
+                Replay splash <span aria-hidden="true">◆</span>
               </button>
             </div>
           </div>
@@ -348,7 +360,7 @@ export default function Home() {
             </p>
             <div className="find-us__actions">
               <a className="button button--cream" href="#menu">See the scoop scale</a>
-              <button className="text-button" type="button" onClick={openSplash}>Replay intro <span>▶</span></button>
+              <button className="text-button" type="button" onClick={openSplash}>Replay splash <span>◆</span></button>
             </div>
           </div>
           <Image
@@ -371,7 +383,7 @@ export default function Home() {
           <div className="site-footer__links">
             <a href="#flavours">Flavours</a>
             <a href="#story">Our story</a>
-            <button type="button" onClick={openSplash}>Watch intro</button>
+            <button type="button" onClick={openSplash}>Replay splash</button>
           </div>
         </div>
         <p className="photo-credits">

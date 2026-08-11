@@ -9,7 +9,6 @@ test("ships the complete Cone Theory experience", async () => {
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     access(new URL("../public/cone-theory-logo.png", import.meta.url)),
-    access(new URL("../public/cone-theory-intro.mp4", import.meta.url)),
     access(new URL("../public/og-v2.jpg", import.meta.url)),
     access(new URL("../public/cone-theory-wordmark.png", import.meta.url)),
     access(new URL("../public/flavour-strawberry.jpg", import.meta.url)),
@@ -17,8 +16,12 @@ test("ships the complete Cone Theory experience", async () => {
     access(new URL("../public/flavour-vanilla.jpg", import.meta.url)),
   ]);
 
-  assert.match(page, /src="\/cone-theory-intro\.mp4"/);
-  assert.match(page, /onEnded=\{closeSplash\}/);
+  assert.match(page, /SPLASH_DURATION_MS = 3_000/);
+  assert.match(page, /window\.setTimeout\(closeSplash, SPLASH_DURATION_MS\)/);
+  assert.match(page, /className="splash__logo"/);
+  assert.match(page, /Built on angles\. Made for cravings\./);
+  assert.match(page, /cone-theory-splash/);
+  assert.doesNotMatch(page, /<video|\.mp4|onEnded/);
   assert.match(page, /id="menu"/);
   assert.match(page, /id="flavours"/);
   assert.match(page, /id="story"/);
@@ -38,6 +41,7 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(css, /--brand-red: #b50d2d/);
   assert.match(css, /animation: ticker 40s linear infinite/);
   assert.match(css, /translate3d\(-50%, 0, 0\)/);
+  assert.match(css, /animation: splash-progress 3s linear both/);
   assert.doesNotMatch(css, /#fedde5|--ice-50/);
   assert.match(layout, /Cone Theory — Built on angles\. Made for cravings\./);
   assert.match(layout, /next\/font\/local/);

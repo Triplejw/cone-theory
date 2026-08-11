@@ -21,7 +21,7 @@ Cone Theory is a single-page brand experience combining a geometric visual
 language, editorial typography, product photography, and motion-led
 interaction.
 
-The site introduces the brand with a replayable film, presents the scoop menu
+The site introduces the brand with a three-second logo splash, presents the scoop menu
 and current flavour lineup, explains the small-batch method, and closes with a
 strong follow-the-brand call to action.
 
@@ -30,10 +30,10 @@ It has no database, API keys, or required environment variables.
 
 ## Experience highlights
 
-- Supplied Cone Theory logo, wordmark, and intro film
+- Supplied Cone Theory logo and wordmark in a minimal timed brand splash
 - Centered responsive header lockup with an enlarged brand mark and wordmark
 - Hover- and keyboard-driven navigation marker
-- Once-per-session cinematic splash screen with manual replay controls
+- Three-second, once-per-session logo splash with a tagline and manual replay controls
 - Pointer-responsive hero artwork and animated geometric details
 - Scroll-progress indicator and continuous brand ticker
 - Clipped panels with continuous cherry-red borders
@@ -47,7 +47,7 @@ It has no database, API keys, or required environment variables.
 
 | Section | Purpose |
 | --- | --- |
-| Intro | Plays the supplied brand film and provides an immediate Enter site action |
+| Splash | Shows the supplied logo and brand line for three seconds with an immediate Enter site action |
 | Hero | Introduces the Built on angles. Made for cravings. positioning |
 | Scoop scale | Presents serving sizes and pricing |
 | Flavours | Shows the current flavour hypotheses with licensed photography |
@@ -121,7 +121,6 @@ instead of a large animation dependency.
 │   ├── layout.tsx                 # Fonts, icons, and social metadata
 │   └── page.tsx                   # Content and client-side interactions
 ├── public/
-│   ├── cone-theory-intro.mp4      # Splash-screen film
 │   ├── cone-theory-logo.png       # Geometric brand artwork
 │   ├── cone-theory-wordmark.png   # Cone Theory wordmark
 │   ├── flavour-*.jpg              # Licensed flavour photography
@@ -171,20 +170,20 @@ pnpm build
 pnpm dlx serve out
 ~~~
 
-## Intro-film behavior
+## Brand-splash behavior
 
-The intro uses public/cone-theory-intro.mp4 as a muted, inline-playing video.
+The entrance treatment uses the supplied public/cone-theory-logo.png artwork
+with the line Built on angles. Made for cravings.
 
 1. It opens automatically on the first page load in a browser session.
 2. Enter site closes it immediately.
-3. It closes automatically when the film ends.
+3. It closes automatically after three seconds.
 4. Completion is stored in sessionStorage for the current session.
-5. Later navigation in the same session skips the automatic intro.
-6. Visitors can replay it from the header, hero, call to action, or footer.
+5. Later navigation in the same session skips the automatic splash.
+6. Visitors can replay the splash from the header, hero, call to action, or footer.
 7. Reduced-motion visitors bypass the automatic splash.
 
-The film is stored as a project asset and does not require an external video
-service.
+The splash uses no video, audio, external service, or additional runtime dependency.
 
 ## Accessibility
 
@@ -195,7 +194,7 @@ service.
 - Labels for icon-only controls
 - Real buttons for actions and links for navigation
 - Immediate splash-screen exit
-- Muted inline autoplay behavior
+- Timed splash with an immediate manual exit
 - prefers-reduced-motion handling
 - Touch-specific interaction adjustments
 - Responsive layouts without intentional page-level horizontal overflow
@@ -205,8 +204,8 @@ should be rechecked after substantial design changes.
 
 ## Assets and licenses
 
-The supplied logo, wordmark, intro film, and generated social artwork are Cone
-Theory project assets.
+The supplied logo, wordmark, and generated social artwork are Cone Theory
+project assets.
 
 Flavour photography comes from Wikimedia Commons:
 
@@ -254,7 +253,7 @@ pnpm test
 
 Recommended release checks:
 
-- Test intro first-view, skip, completion, and replay paths
+- Test splash first-view, skip, three-second completion, and replay paths
 - Test keyboard navigation and focus visibility
 - Check every internal anchor
 - Inspect desktop, tablet, and mobile breakpoints

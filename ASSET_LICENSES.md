@@ -1,6 +1,6 @@
 # Asset licenses
 
-Cone Theory's supplied logo, wordmark, intro video, and generated social card
+Cone Theory's supplied logo, wordmark, and generated social card
 remain project brand assets.
 
 The flavour photography is sourced from Wikimedia Commons:
