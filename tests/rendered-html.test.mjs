@@ -50,6 +50,8 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(css, /animation: splash-progress 3s linear both/);
   assert.match(css, /\.story-profile-grid/);
   assert.match(css, /\.story-home-trigger/);
+  assert.match(css, /\.story-values__grid article\.reveal[\s\S]*animation-name: reveal-card-up/);
+  assert.match(css, /@keyframes reveal-card-up/);
   assert.doesNotMatch(css, /#fedde5|--ice-50/);
   assert.match(storyPage, /export const metadata/);
   assert.doesNotMatch(storyPage, /["']use client["']/);
