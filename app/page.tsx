@@ -141,6 +141,10 @@ export default function Home() {
       </a>
 
       <header className="site-header">
+        <nav className="site-nav site-nav--left" aria-label="Primary navigation">
+          <a href="#menu">Menu</a>
+          <a href="#story">Our story</a>
+        </nav>
         <a className="brand" href="#top" aria-label="Cone Theory home">
           <span className="brand__mark" aria-hidden="true">
             <Image
@@ -160,19 +164,19 @@ export default function Home() {
             priority
           />
         </a>
-        <nav className="site-nav" aria-label="Primary navigation">
-          <a href="#menu">Menu</a>
-          <a href="#story">Our story</a>
-          <a href="#flavours">Flavours</a>
-          <button type="button" onClick={openSplash}>Watch intro</button>
-        </nav>
-        <div className="header-actions">
-          <button className="intro-trigger" type="button" onClick={openSplash} aria-label="Replay intro film">
-            <span aria-hidden="true">▶</span>
-          </button>
-          <a className="button button--compact" href="#menu">
-            Show menu
-          </a>
+        <div className="header-right">
+          <nav className="site-nav site-nav--right" aria-label="Secondary navigation">
+            <a href="#flavours">Flavours</a>
+            <button type="button" onClick={openSplash}>Watch intro</button>
+          </nav>
+          <div className="header-actions">
+            <button className="intro-trigger" type="button" onClick={openSplash} aria-label="Replay intro film">
+              <span aria-hidden="true">▶</span>
+            </button>
+            <a className="button button--compact" href="#menu">
+              Show menu
+            </a>
+          </div>
         </div>
       </header>
 

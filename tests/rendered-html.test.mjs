@@ -25,11 +25,16 @@ test("ships the complete Cone Theory experience", async () => {
   assert.match(page, /id="find-us"/);
   assert.match(page, /openSplash/);
   assert.match(page, /className="brand__mark"/);
+  assert.match(page, /site-nav site-nav--left/);
+  assert.match(page, /site-nav site-nav--right/);
+  assert.match(page, /className="header-right"/);
   assert.match(page, /cone-theory-wordmark\.png/);
   assert.doesNotMatch(page, /site-nav__active/);
   assert.match(page, /Wikimedia Commons/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /--brand-red: #b50d2d/);
+  assert.doesNotMatch(css, /#fedde5|--ice-50/);
   assert.match(layout, /Cone Theory — Built on angles\. Made for cravings\./);
   assert.match(layout, /next\/font\/local/);
   assert.match(layout, /images: \["\/og-v2\.jpg"\]/);

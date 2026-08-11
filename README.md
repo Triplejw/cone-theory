@@ -31,7 +31,7 @@ It has no database, API keys, or required environment variables.
 ## Experience highlights
 
 - Supplied Cone Theory logo, wordmark, and intro film
-- Sticky responsive header with a cropped brand mark and full wordmark
+- Centered responsive header lockup with an enlarged brand mark and wordmark
 - Hover- and keyboard-driven navigation marker
 - Once-per-session cinematic splash screen with manual replay controls
 - Pointer-responsive hero artwork and animated geometric details
@@ -66,10 +66,9 @@ app/globals.css.
 | --- | --- | --- |
 | --cream | #FFF3E2 | Primary page background |
 | --cream-soft | #FFF8F2 | Soft neutral surface |
-| --ice-50 | #FEDDE5 | Pale pink section and card surface |
 | --ice-100 | #FCB3C4 | Secondary ice-cream pink |
 | --ice-300 | #F985A0 | Strong pink accent |
-| --brand-red | #B50D2D | Primary actions and brand emphasis |
+| --brand-red | #B50D2D | Primary actions, cards, sections, and brand emphasis |
 | --cherry-mid | #880A13 | Borders and structural details |
 | --cherry-dark | #5B070D | Deep interaction colour |
 | --ink | #201B11 | Primary text and dark surfaces |
